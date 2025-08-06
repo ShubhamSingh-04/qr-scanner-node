@@ -4,6 +4,7 @@ import getRelativePath from './utils/getRelativeFilePath.util.js';
 import morgan from 'morgan';
 import env from './config/env.js';
 import mealRoutes from './routes/meal.route.js'
+import attendanceRoute from './routes/attendance.route.js'
 
 const thisFilePath = getRelativePath(import.meta.url); // Path to this file
 
@@ -16,6 +17,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/api/meal', mealRoutes);
+app.use('/api/attendance', attendanceRoute);
 
 
 app.get('/health', (req, res) => {

@@ -5,6 +5,8 @@ import LunchDay1 from '../models/LunchDay1.model.js';
 // services/meal.service.js
 import BreakfastDay2 from '../models/BreakfastDay2.model.js';
 
+import getIndianTime from '../utils/currentIndianTime.js';
+
 
 export const markDinnerDay1Done = async (memberUniqueCode) => {
   const member = await DinnerDay1.findByPk(memberUniqueCode);
@@ -27,7 +29,8 @@ export const markDinnerDay1Done = async (memberUniqueCode) => {
   }
 
   member.dinner_status = 'Done';
-  member.dinner_time = new Date(); // Current timestamp
+
+  member.dinner_time = getIndianTime();
   await member.save();
 
   return {
@@ -59,7 +62,7 @@ export const markLunchDay1Done = async (memberUniqueCode) => {
   }
 
   member.lunch_status = 'Done';
-  member.lunch_time = new Date();
+  member.lunch_time = getIndianTime();
   await member.save();
 
   return {
@@ -91,7 +94,7 @@ export const markBreakfastDay2Done = async (memberUniqueCode) => {
   }
 
   member.breakfast_status = 'Done';
-  member.breakfast_time = new Date();
+  member.breakfast_time = getIndianTime();
   await member.save();
 
   return {
