@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import env from './env';
+import env from './env.js';
 import logger from '../utils/logger.util.js'
 import getRelativePath from '../utils/getRelativeFilePath.util.js';
 
@@ -13,7 +13,11 @@ if(!env.DB_HOST ||
         logger.error("DB_HOST, DB_NAME, DB_PASS, DB_USER required in src\\config\\env.js", thisFilePath)
     }
 
-const sequelize = new Sequelize(env.DB_NAME, env.DB_USER, env.DB_PASS, {
+const sequelize = new Sequelize(
+  env.DB_NAME, 
+  env.DB_USER, 
+  env.DB_PASS, 
+  {
   host: env.DB_HOST,
   dialect: 'postgres',
   logging: false, // disable SQL logs in terminal

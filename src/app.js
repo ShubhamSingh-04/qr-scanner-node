@@ -3,6 +3,7 @@ import logger from './utils/logger.util.js'
 import getRelativePath from './utils/getRelativeFilePath.util.js';
 import morgan from 'morgan';
 import env from './config/env.js';
+import mealRoutes from './routes/meal.route.js'
 
 const thisFilePath = getRelativePath(import.meta.url); // Path to this file
 
@@ -13,6 +14,8 @@ app.use(express.json())
 
 // Morgan for logging HTTP requests
 app.use(morgan('dev'))
+
+app.use('/api/meal', mealRoutes);
 
 
 app.get('/health', (req, res) => {
