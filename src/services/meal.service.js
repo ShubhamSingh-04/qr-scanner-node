@@ -6,6 +6,11 @@ import LunchDay1 from '../models/LunchDay1.model.js';
 import BreakfastDay2 from '../models/BreakfastDay2.model.js';
 
 import getIndianTime from '../utils/currentIndianTime.js';
+import logger from '../utils/logger.util.js';
+import getRelativePath from '../utils/getRelativeFilePath.util.js';
+
+
+const thisFilePath = getRelativePath(import.meta.url); // Path to this file
 
 
 export const markDinnerDay1Done = async (memberUniqueCode) => {
@@ -43,6 +48,8 @@ export const markDinnerDay1Done = async (memberUniqueCode) => {
 
 export const markLunchDay1Done = async (memberUniqueCode) => {
   const member = await LunchDay1.findByPk(memberUniqueCode);
+
+  logger.info(`${member}`, thisFilePath)
 
   if (!member) {
     const error = new Error('Member not found');

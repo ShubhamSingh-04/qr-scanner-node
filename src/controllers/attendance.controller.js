@@ -9,16 +9,16 @@ export const markAttendance = async (req, res) => {
     return res.status(200).json({
       status: 'success',
       message: 'Attendance marked as Done',
-      member_unique_code: result.member_unique_code,
-      member_name: result.member_name,
+      unique_code: result.member_unique_code,
+      name: result.member_name,
     });
 
   } catch (error) {
     return res.status(error.statusCode || 500).json({
       status: 'error',
       message: error.message,
-      member_unique_code: error.meta?.member_unique_code || member_unique_code,
-      member_name: error.meta?.member_name || 'Unknown',
+      unique_code: error.meta?.member_unique_code || member_unique_code,
+      name: error.meta?.member_name || 'Unknown',
     });
   }
 };

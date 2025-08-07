@@ -8,6 +8,8 @@ import attendanceRoute from './routes/attendance.route.js'
 
 const thisFilePath = getRelativePath(import.meta.url); // Path to this file
 
+import cors from 'cors';
+
 const app = express()
 
 // Parse JSON request bodies
@@ -16,9 +18,17 @@ app.use(express.json())
 // Morgan for logging HTTP requests
 app.use(morgan('dev'))
 
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+app.options('/*splat', cors()); // enable pre-flight across-the-board
+
 app.use('/api/meal', mealRoutes);
 app.use('/api/attendance', attendanceRoute);
-
 
 app.get('/health', (req, res) => {
     logger.success("Health check endpoint hit", thisFilePath + '\\health');
